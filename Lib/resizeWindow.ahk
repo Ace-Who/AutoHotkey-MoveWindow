@@ -27,17 +27,13 @@
     r := (r < rateCap) ? (1.2 * r + 0.08) : rateCap
     WinGetPos, x, y, width, height, %winTitle%
     bds := [[x, x + width], [y, y + height]]
-    /* As WinMove ignores the decimal part of coordinates, an offset is needed
-     * for some situation to make a random r result same displacement in both
-     * directions.
+    /* As WinMove ignores the decimal part of coordinates, Round() is needed
+     * to make a random r result even displacements in both directions.
      */
     for i, dispPair in disps {
       for j, disp in dispPair {
         if dArgs[i][j] {
-          d := dArgs[i][j]
-          ; b := bds[i][j]
-          ; disps[i][j] := (b<>0) * ((b>0) - 0.5) + Max(1, r) * d
-          disps[i][j] := Round(r * d + (bds[i][j] * d >= 0) * d/Abs(d))
+          disps[i][j] := Round(r * dArgs[i][j])
         }
       }
     }

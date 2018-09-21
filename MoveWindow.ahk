@@ -84,7 +84,7 @@
     } else {
       ToolTip, resize anchor`nW*H: %width%`, %height%, % width, % height
     }
-    SetTimer, enableMoveWindowHotkeys, 100
+    SetTimer, enableMoveWindowHotkeys, 50
   }
 
 bringWindowLeftLeft:

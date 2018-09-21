@@ -27,14 +27,15 @@
     WinGetPos, x, y, width, height, %winTitle%
     left := x, right := x + width
     top := y, bottom := y + height
-    /* As WinMove ignores the decimal part of coordinates, an offset is needed
-     * for some situation to make a random r result same displacement in both
-     * directions.
+    /* As WinMove ignores the decimal part of coordinates, Round() is needed
+     * to make a random r result even displacements in both directions.
      */
     ; disp.1 := (x<>0) * ((x>0) - 0.5) + Max(1, r) * dx
     ; disp.2 := (y<>0) * ((y>0) - 0.5) + Max(1, r) * dy
-    disp.1 := dx ? r * dx + (x*dx>=0) * dx/Abs(dx) : 0
-    disp.2 := dy ? r * dy + (y*dy>=0) * dy/Abs(dy) : 0
+    ; disp.1 := dx ? r * dx + (x*dx>=0) * dx/Abs(dx) : 0
+    ; disp.2 := dy ? r * dy + (y*dy>=0) * dy/Abs(dy) : 0
+    disp.1 := dx ? Round(r * dx) : 0
+    disp.2 := dy ? Round(r * dy) : 0
 
     ; Adsorb area edge.
     adsorb.1 := false
